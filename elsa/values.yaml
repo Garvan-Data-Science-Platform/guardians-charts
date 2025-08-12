@@ -8,9 +8,22 @@ image:
   repository: ghcr.io/elsa-data/elsa-data
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "pr-557"
+  tag:
+
+postgres:
+  fullnameOverride: elsa-postgres
+  image:
+    repository: postgres
+    tag: 17.5
+  primary:
+    containerSecurityContext:
+      readOnlyRootFilesystem: false
+  global:
+    security:
+      allowInsecureImages: true
 
 config:
+  deployedUrl: #Required
   oidc:
     issuerUrl:
     clientId:
@@ -71,7 +84,7 @@ service:
 
 ingress:
   enabled: false
-  className: ""
+  className: "nginx"
   annotations:
     {}
     # kubernetes.io/ingress.class: nginx

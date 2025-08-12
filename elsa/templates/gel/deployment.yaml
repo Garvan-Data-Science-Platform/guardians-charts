@@ -35,7 +35,7 @@ spec:
             - name: GEL_PG_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-postgresql
+                  name: elsa-postgres
                   key: postgres-password
             - name: GEL_SERVER_BACKEND_DSN
-              value: postgres://postgres:$(GEL_PG_PASSWORD)@{{ .Release.Name }}-postgresql:5432
+              value: postgres://postgres:$(GEL_PG_PASSWORD)@elsa-postgres:5432
