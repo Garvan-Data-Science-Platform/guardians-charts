@@ -33,6 +33,9 @@ ctrl:
     annotations:
       acme.cert-manager.io/http01-edit-in-place: "true"
       cert-manager.io/issuer: "letsencrypt-prod"
+      nginx.org/hsts: "True"
+      nginx.org/hsts-max-age: "31536000"
+      nginx.org/hsts-include-subdomains: "True"
     hosts:
       userClient:
         host: ctrlhost
@@ -54,6 +57,12 @@ letsencryptEmail: #Required if using cert-manager
 
 nginx-ingress:
   enabled: true
+  controller:
+    config:
+      entries:
+        ssl-protocols: "TLSv1.2 TLSv1.3"
+        ssl-ciphers: "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384"
+        ssl-prefer-server-ciphers: "True"
 
 imagePullSecrets: []
 nameOverride: ""
